@@ -1,11 +1,10 @@
 from datetime import datetime
-
 from random import randrange
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static_dir')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 db = SQLAlchemy(app)
@@ -22,10 +21,15 @@ class Opinion(db.Model):
 def index_view():
     quantity = Opinion.query.count()
     if not quantity:
-        return 'В базе данных мнений о фильмах нет.'
+        return 'В базе данных записей нет.'
     offset_value = randrange(quantity)
     opinion = Opinion.query.offset(offset_value).first()
-    return opinion.text
+    return render_template('opinion.html', opinion=opinion)
+
+@app.route('/add')
+def add_opinion_view():
+    # Подключить шаблон add_opinion.html.
+    return render_template('add_opinion.html')
 
 if __name__ == '__main__':
     app.run()
