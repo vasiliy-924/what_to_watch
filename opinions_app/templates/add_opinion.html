@@ -29,11 +29,10 @@
         </form>
 
         <p class="py-3 mb-3">
-          {% with messages = get_flashed_messages(with_catefories=true) %}
+          {% with messages = get_flashed_messages() %}
             {% if messages %}
               {% for message in messages %}
-                {{ message }}
-                {{ catefory }}
+                <span class="text-danger">{{ message }}</span>
               {% endfor %}
             {% endif %}
           {% endwith %}
