@@ -40,3 +40,7 @@ pip install -r requirements.txt
 ```
 flask run
 ```
+
+![alt text](README_static/im_1.png)
+![alt text](README_static/im_2.png)
+![alt text](README_static/im_3.png)
